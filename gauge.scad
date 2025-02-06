@@ -7,18 +7,17 @@ module gauge(gauge_size, gauge_width, gauge_height, gauge_thickness, hole_size) 
         union() {
             difference(){
                 union() {
-                    minkowski()
-                    {
+                    minkowski() {
                       cube([gauge_width - body_radius, gauge_height - body_radius, gauge_thickness / 2], center = true);
                       cylinder(d = body_radius, h = gauge_thickness / 2, center = true);
-                    }
+                    };
 
                     translate([-((gauge_width / 2) - (body_radius / 2)), (gauge_height / 2)  - (body_radius / 2), 0])
                         cube([body_radius, body_radius, gauge_thickness], center = true);
 
                     translate([(gauge_width / 2) - (body_radius / 2), (gauge_height / 2)  - (body_radius / 2), 0])
                         cube([body_radius, body_radius, gauge_thickness], center = true);
-                }
+                };
 
                 translate([-(gauge_width / 2), gauge_height / 2, 0])
                     cylinder(h = gauge_thickness, r1 = gauge_size, r2 = gauge_size, center = true);
@@ -45,15 +44,13 @@ module gauge(gauge_size, gauge_width, gauge_height, gauge_thickness, hole_size) 
         if (hole_size > 0) {
             translate([(gauge_width / 2) - 3.5, -((gauge_height / 2) - 3.5), 0])
                 cylinder(h = gauge_thickness, d = hole_size, center = true);
-        }
+        };
 
         translate([0, -(gauge_height / 3), 0])
             linear_extrude(gauge_thickness, center = true)
                 text(str(gauge_size, "mm"), size = 6, valign = "center", halign = "center", font = "OpenSans:style=Extrabold");
     };
-}
-
-
+};
 
 thickness = false;
 hole = 5.5;
